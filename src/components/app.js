@@ -4,9 +4,8 @@ import Navbar from './navbar'
 export default class App extends Component {
   render() {
     return (
-      <div>
-        <h1>PickT</h1>
-        <Navbar />
+      <div className='row'>
+        <Navbar links={['Sign In', 'Contact']} />
       </div>
     );
   }
