@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Navbar = props => (
+const Navbar = (props = {links: []}) => (
   <nav className="navbar navbar-light bg-faded">
     <a className="navbar-brand col-lg-8" href="#">PickT</a>
 
