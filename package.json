@@ -23,9 +23,10 @@
     "chai-jquery": "^2.0.0",
     "enzyme": "^2.5.1",
     "jquery": "^2.2.1",
-    "jsdom": "^8.1.0",
+    "jsdom": "^8.5.0",
     "mocha": "^2.5.3",
     "react-addons-test-utils": "^0.14.7",
+    "sinon": "^1.17.6",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.0"
   },
@@ -36,6 +37,7 @@
     "babel-preset-stage-1": "^6.1.18",
     "babel-register": "^6.18.0",
     "bootstrap": "^3.3.7",
+    "jquery": "^2.2.4",
     "lodash": "^3.10.1",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
@@ -50,7 +52,9 @@
     ]
   },
   "ava": {
-    "require": ["babel-register"],
+    "require": [
+      "babel-register"
+    ],
     "babel": "inherit"
   }
 }

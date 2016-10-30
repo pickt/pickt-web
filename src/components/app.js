@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Navbar from './navbar'
 import Card from './card'
 import { getMarketDetails } from '../services/get-market-details'
+import { ajax } from 'jquery'
 
 export default class App extends Component {
   constructor(props) {
