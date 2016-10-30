@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from './navbar'
+import Card from './card'
 
 export default class App extends Component {
   constructor(props) {
@@ -13,6 +14,18 @@ export default class App extends Component {
     const zip = '67208';
 
     const self = this;
+
+    const getDetail = (id) => {
+      $.ajax({
+        type: 'GET',
+        contentType: 'application/json; charset=utf-8',
+        url: 'http://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id=' + id,
+        dataType: 'jsonp',
+        success: data => {
+          self.setState({marketDetails: self.state.marketDetails.concat(data)})
+        }
+      })
+    }
     $.ajax({
       type: "GET",
       contentType: "application/json; charset=utf-8",
@@ -23,35 +36,31 @@ export default class App extends Component {
         console.log(this.state)
         const ids = this.state.markets.map(market => market.id)
         ids.forEach(id => {
-
-        $.ajax({
-          type: 'GET',
-          contentType: 'application/json; charset=utf-8',
-          url: 'http://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id=' + id,
-          dataType: 'jsonp',
-          success: data => self.setState({marketDetails: self.state.marketDetails.concat(data)})
-        })
-
+          getDetail(id)
         })
       },
       fail: err => console.log(err)
     });
+
   }
 
   render() {
     const details = () => {
       if(this.state.marketDetails.length) {
         return this.state.marketDetails.map(market => {
+          const {
+            Address, 
+            GoogleLink, 
+            Products, 
+            Schedule
+          } = market.marketdetails
+
           console.log(market)
           return (
-            <div className='card'>
-              <div className='card-block'>
-                <h4 className='card-title'>{market.marketdetails.Address}</h4>
-                <p className='card-text'>{market.marketdetails.GoogleLink}</p>
-                <p className='card-text'>{market.marketdetails.Products}</p>
-                <p className='card-text'>{market.marketdetails.Schedule}</p>
-              </div>
-            </div>
+            <Card 
+              title={market.marketdetails.Address} textItems={[]} 
+              textItems={[Address, GoogleLink, Products, Schedule]}
+            />
           )
         })
       }
