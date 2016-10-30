@@ -3,7 +3,7 @@ import { expect } from 'chai'
 import { shallow } from 'enzyme'
 import Navbar from '../../src/components/navbar'
 
-describe('App' , () => {
+describe('Navbar' , () => {
   it('should render the Navbar with the appropriate number of links', () => {
     const navbar = shallow(<Navbar links={['Sign in', 'About']} />)
     expect(navbar.find('nav ul.nav li').length).to.eql(2)
