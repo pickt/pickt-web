@@ -9,16 +9,16 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    const self = this
+    const baseURL = 'http://search.ams.usda.gov/farmersmarkets/v1/data.svc/'
+    const zip = '67208';
 
     $.ajax({
       type: "GET",
       contentType: "application/json; charset=utf-8",
-      url: "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=67208",
+      url: `${baseURL}/zipSearch?zip=${zip}`,
       dataType: 'jsonp',
-      success: function(data) { 
-        self.setState({markets: data.results})
-      }
+      success: (data) => this.setState({markets: data.results}),
+      fail: err => console.log(err)
     });
   }
 
