@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from './navbar'
 import Card from './card'
+import { getMarkets } from '../services/get-markets'
 import { getMarketDetails } from '../services/get-market-details'
 import { ajax } from 'jquery'
 
@@ -19,22 +20,16 @@ export default class App extends Component {
 
     const self = this;
 
-    $.ajax({
-      type: "GET",
-      contentType: "application/json; charset=utf-8",
-      url: `${baseURL}/zipSearch?zip=${zip}`,
-      dataType: 'jsonp',
-      success: (data) => {
+    getMarkets(baseURL, zip)
+      .done(data => {
         this.updateMarkets(data.results)
-
         const ids = this.state.markets.map(market => market.id)
+
         ids.forEach(id => {
           getMarketDetails(id, this.updateMarketDetails)
         })
-      },
-      fail: err => console.log(err)
-    });
-
+      })
+      .fail(err => console.log(err))
   }
 
   updateMarketDetails(data) {
