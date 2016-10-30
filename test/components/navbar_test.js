@@ -1,20 +1,18 @@
 import React from 'react'
-import { expect } from 'chai'
+import test from 'ava'
 import { shallow } from 'enzyme'
 import Navbar from '../../src/components/navbar'
 
-describe('Navbar' , () => {
-  it('should render the Navbar with the appropriate number of links', () => {
-    const navbar = shallow(<Navbar links={['Sign in', 'About']} />)
-    expect(navbar.find('nav ul.nav li').length).to.eql(2)
-  });
+test('Navbar renders with appropriate number of links', t => {
+  const navbar = shallow(<Navbar links={['Sign in', 'About']} />)
+  t.deepEqual(navbar.find('nav ul.nav li').length, 2)
+})
 
-  it('should render the links as text', () => {
-    const navbar = shallow(<Navbar links={['Sign in', 'About']} />)
-    const signIn = <a className='nav-link' href='#'>Sign in</a>
-    const about = <a className='nav-link' href='#'>About</a>
+test('Navbar renders the links as text', t => {
+  const navbar = shallow(<Navbar links={['Sign in', 'About']} />)
+  const signIn = <a className='nav-link' href='#'>Sign in</a>
+  const about = <a className='nav-link' href='#'>About</a>
 
-    expect(navbar.contains(signIn)).to.eql(true)
-    expect(navbar.contains(about)).to.eql(true)
-  })
-});
+  t.deepEqual(navbar.contains(signIn), true)
+  t.deepEqual(navbar.contains(about), true)
+})

@@ -1,12 +1,12 @@
-import React from 'react'
-import { expect } from 'chai'
-import { shallow } from 'enzyme'
+import React from 'react';
+import test from 'ava';
+import { shallow } from 'enzyme';
+import { expect } from 'chai';
+
 import App from '../../src/components/app'
 import Navbar from '../../src/components/navbar'
 
-describe('App' , () => {
-  it('should render the Navbar', () => {
-    const app = shallow(<App />)
-    expect(app.find(Navbar)).to.have.length(1);
-  });
-});
+test('App', t => {
+  const app = shallow(<App />)
+  t.deepEqual(app.find(Navbar).length, 1)
+})

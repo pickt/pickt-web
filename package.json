@@ -6,12 +6,12 @@
   "repository": "git@github.com:StephenGrider/ReduxSimpleStarter.git",
   "scripts": {
     "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-    "test": "mocha --compilers js:babel-register --require babel-polyfill --recursive ./test",
-    "test:watch": "npm run test -- --watch"
+    "test": "ava test/"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "ava": "^0.16.0",
     "babel-core": "^6.2.1",
     "babel-loader": "^6.2.0",
     "babel-plugin-__coverage__": "^11.0.0",
@@ -43,24 +43,14 @@
     "react-router": "^2.0.1",
     "redux": "^3.0.4"
   },
-  "nyc": {
-    "include": [
-      "src/components/*.js"
-    ],
-    "sourceMap": false,
-    "instrument": false
-  },
-  "bable": {
+  "babel": {
     "presets": [
       "es2015",
       "react"
-    ],
-    "env": {
-      "test": {
-        "plugins": [
-          "istanbul"
-        ]
-      }
-    }
+    ]
+  },
+  "ava": {
+    "require": ["babel-register"],
+    "babel": "inherit"
   }
 }
