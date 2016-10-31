@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 const Navbar = (props = {links: []}) => {
   const links = props.links.map(item => (
@@ -16,6 +16,10 @@ const Navbar = (props = {links: []}) => {
       </ul>
     </nav>
   )
+}
+
+Navbar.propTypes = {
+  links: PropTypes.array.isRequired
 }
 
 export default Navbar
